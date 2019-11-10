@@ -32,6 +32,7 @@ class DotSpace
 public:
 	DotSpace()
 	{
+		//Default ctor creates field of 9x9 rectangles
 		for (int x = 0; x < 9; x++)
 		{
 			for (int y = 0; y < 9; y++)
@@ -39,7 +40,14 @@ public:
 				points.emplace_back(Point{ x * 10, y * 10 });
 			}
 		}
+		
+		//Initializes the subset vector: fills it with all possible 4-point subsets
 		SubSet(std::vector<Point>(0), points);
+		
+		//Initializes the permutation vector: fills it with all possible 4-point permutations
+		//Permute(std::vector<Point>(0), points);
+		
+		//Performs the calculation of # of rectangles
 		CountRect();
 	}
 
@@ -49,6 +57,7 @@ public:
 	{
 		//Permute(std::vector<Point>(0), points);
 		SubSet(std::vector<Point>(0), points);
+		CountRect();
 	}
 	void PrintPermQuarts()
 	{
