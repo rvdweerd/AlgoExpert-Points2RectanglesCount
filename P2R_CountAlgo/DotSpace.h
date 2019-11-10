@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <vector>
 
 template <typename T>
 void Print(std::vector<T> vec)
@@ -33,9 +34,9 @@ public:
 	DotSpace()
 	{
 		//Default ctor creates field of 9x9 rectangles
-		for (int x = 0; x < 9; x++)
+		for (int x = 0; x < 10; x++)
 		{
-			for (int y = 0; y < 9; y++)
+			for (int y = 0; y < 10; y++)
 			{
 				points.emplace_back(Point{ x * 10, y * 10 });
 			}
@@ -81,6 +82,11 @@ public:
 			std::cout << std::endl;
 		}
 	}
+	int GetNPoints()
+	{
+		return int(points.size());
+	}
+
 	int GetNSquares()
 	{
 		return nSquares;

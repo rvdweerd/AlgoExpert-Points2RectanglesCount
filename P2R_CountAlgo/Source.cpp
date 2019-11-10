@@ -16,13 +16,13 @@ struct classcomp {
 	}
 };
 
-template<typename Map>
-void print_map(Map& m)
+//template<typename Map>
+void print_map(std::map<std::pair<int, int>, int>& m)
 {
-	std::cout << '{';
+	//std::cout << '{';
 	for (auto& p : m)
-		std::cout << p.first << ':' << p.second << ' ';
-	std::cout << "}\n";
+		std::cout << "("<<p.first.first<<","<<p.first.second<<") " << ':' << p.second << "\n";
+	std::cout << "\n";
 }
 
 struct Point_ { double x, y; };
@@ -34,43 +34,30 @@ struct PointCmp {
 
 int main()
 {
-	/*
+	
 	FrameTimer ft;
-	DotSpace d;// (std::vector<Point>{ { 0, 0 }, { 10,0 }, { 10,10 }, { 0,10 }, { 30,0 }, { 30,10 }, { 10,30 }, { 30,30 }, { 0,30 }});
-	float dt = ft.Mark();
+	DotSpace d;
+	float dt1 = ft.Mark();
+	// METHOD 1: (inefficient): create subset of all combinations of 4 points and check each for IsRectangle
+	std::cout << "METHOD 1\n";
+	std::cout << "========\n";
+	std::cout << "Nummber of points: " << d.GetNPoints() << std::endl;
 	std::cout << "Nummber of rectangles: " << d.GetNSquares() << std::endl;
 	std::cout << "Number of subsets: " << d.GetNSubsets() << std::endl;
-	std::cout << "Time elapsed (s): " << dt << std::endl;
-	*/
-	/*
-	std::map<char, int> first;
-	first['b'] = 30;
-	first['a'] = 50;
-	first['c'] = 10;
-	first['d'] = 70;
-	std::map<char, int, classcomp> second(first.begin(), first.end());                 // class as Compare
-	bool(*fn_pt)(char, char) = fncomp;
-	std::map<char, int, bool(*)(char, char)> fifth(fn_pt); // function pointer as Compare
-	fifth.insert(std::pair<char,int>( 's',2 ));
-	fifth.insert({ 'p', 5 });
-	fifth.insert({ 'p', 15 });
-	fifth['p'] = 20;
+	std::cout << "Time elapsed (s): " << dt1 << std::endl;
 	
-	std::map<std::string, int> map1;
-	map1["something"] = 69;
-	map1["anything"] = 199;
-	map1["that thing"] = 50;
-	std::cout << "map1 = "; print_map(map1);
-	*/
 
-	std::set<std::pair<int, int>> points = { { 0, 0 }, { 0,10 },{ 0, 0 }, { 0,10 },{ 0, 0 }, { 0,10 } }; //{ 10,10 }, { 0,10 }, { 30,0 }, { 30,10 }, { 10,30 }, { 30,30 }, { 0,30 } };
-	//for (int x = 0; x < 9; x++)
-	//{
-	//	for (int y = 0; y < 9; y++)
-	//	{
-	//		points.emplace_back(std::pair<int,int>( x * 10, y * 10 ));
-	//	}
-	//}
+	// METHOD 2: (efficient): create a map of distinct verticals and track their occurrances along the horizontal axis
+	ft.Mark();
+	std::set<std::pair<int, int>> points;
+	for (int x = 0; x < 10; x++)
+	{
+		for (int y = 0; y < 10; y++)
+		{
+			points.emplace(std::pair<int,int>( x * 10, y * 10 ));
+		}
+	}
+
 	std::map<std::pair<int, int>, int> map;
 	int count = 0;
 
@@ -91,10 +78,17 @@ int main()
 			}
 		}
 	}
-	true;
-	
-	
-	
+	float dt2 = ft.Mark();
+	std::cout << "\nMETHOD 2\n";
+	std::cout << "========\n";
+	std::cout << "Number of points: " << points.size() << std::endl;
+	std::cout << "Number of rectangles: " << count << std::endl;
+	std::cout << "Map: \n"; print_map(map);
+	std::cout << "Time elapsed (s): " << dt2 << std::endl;
+
+	std::cout << "\nDIFFERENCE IN PERFORMANCE\n";
+	std::cout << "dt1/dt2 = " << dt1/dt2 << std::endl;
+	   
 	std::cin.get();
 	return 0;
 }
