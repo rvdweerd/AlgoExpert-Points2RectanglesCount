@@ -6,6 +6,7 @@
 #include "FrameTimer.h"
 #include "DotSpace.h"
 #include <set>
+#include "ArrayMap.h"
 
 bool fncomp(char lhs, char rhs) { return lhs < rhs; }
 
@@ -50,15 +51,16 @@ int main()
 	// METHOD 2: (efficient): create a map of distinct verticals and track their occurrances along the horizontal axis
 	ft.Mark();
 	std::set<std::pair<int, int>> points;
-	for (int x = 0; x < 10; x++)
+	for (int x = 0; x < 3; x++)
 	{
-		for (int y = 0; y < 10; y++)
+		for (int y = 0; y < 3; y++)
 		{
 			points.emplace(std::pair<int,int>( x * 10, y * 10 ));
 		}
 	}
 
-	std::map<std::pair<int, int>, int> map;
+	//std::map<std::pair<int, int>, int> map;
+	ArrayMap<std::pair<int, int>, int> map;
 	int count = 0;
 
 	for (auto p_top : points)
@@ -69,10 +71,14 @@ int main()
 			{
 				if (p_top.first == p_bottom.first && p_top.second < p_bottom.second)
 				{
-					//map.insert({ { p_top.second, p_bottom.second }, 0 });
+					// //map.insert({ { p_top.second, p_bottom.second }, 0 });
+					//std::pair<int, int> pair_y = { p_top.second, p_bottom.second };
+					//count += map[pair_y];
+					// //count += map.at(pair_y);
+					//map[pair_y] += 1;
 					std::pair<int, int> pair_y = { p_top.second, p_bottom.second };
+					map.Put( pair_y, 0 );
 					count += map[pair_y];
-					//count += map.at(pair_y);
 					map[pair_y] += 1;
 				}
 			}
@@ -83,7 +89,7 @@ int main()
 	std::cout << "========\n";
 	std::cout << "Number of points: " << points.size() << std::endl;
 	std::cout << "Number of rectangles: " << count << std::endl;
-	std::cout << "Map: \n"; print_map(map);
+	//std::cout << "Map: \n"; print_map(map);
 	std::cout << "Time elapsed (s): " << dt2 << std::endl;
 
 	std::cout << "\nDIFFERENCE IN PERFORMANCE\n";

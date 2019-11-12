@@ -34,9 +34,9 @@ public:
 	DotSpace()
 	{
 		//Default ctor creates field of 9x9 rectangles
-		for (int x = 0; x < 10; x++)
+		for (int x = 0; x < 3; x++)
 		{
-			for (int y = 0; y < 10; y++)
+			for (int y = 0; y < 3; y++)
 			{
 				points.emplace_back(Point{ x * 10, y * 10 });
 			}
