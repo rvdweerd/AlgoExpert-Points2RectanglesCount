@@ -23,7 +23,7 @@
     <ProjectGuid>{4C5C974E-3D89-4194-8925-8D59B47CBC86}</ProjectGuid>
     <RootNamespace>P2R_CountAlgo</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>P2R_CountAlgo</ProjectName>
+    <ProjectName>AlgoExpert-Points2RectanglesCount</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
