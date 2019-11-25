@@ -1,5 +1,5 @@
 # AlgoExpert-Points2RectanglesCount
-Algo challenge - dots on 2d; calculate number of rectangles
+AlgoExpert.io challenge - dots on 2d; calculate number of rectangles
 
 (Own O(N^3)) solution implemented</br>
 * Creates a class DotSpace
