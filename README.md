@@ -1,4 +1,4 @@
-# AlgoExpert-Points2RectanglesCount
+# algorithms_Points2RectanglesCount
 AlgoExpert.io challenge - dots on 2d; calculate number of rectangles
 
 (Own O(N^3)) solution implemented</br>
